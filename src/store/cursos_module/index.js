@@ -65,12 +65,12 @@ const datos_cursos = {
         consultarCursos:(context)=>{
             console.log('LLAMADO A CONSULTAR CURSOS');
             // si el json lo tenemos guardado en la carpeta publica
-            // let url = "datoscursos.json";
+            let url = "datoscursos.json";
 
             // si el json es servido mediante json-server
             // hay que guardar el json en una carpeta (fake_api)
             // levantar el servidor en la carpeta (fake_api) con el comando json-server --watch archivo.json
-            let url = "http://localhost:3000/cursos";
+            // let url = "http://localhost:3000/cursos";
             axios.get(url)
                 .then(respuesta=>{
                     // console.log(respuesta);
@@ -79,15 +79,15 @@ const datos_cursos = {
                     console.log(respuesta.data);
 
                     // salida del servidor localhost 3000
-                    context.commit('CONSULTAR_CURSOS', respuesta.data);
-                    console.log(typeof respuesta.data);
+                    // context.commit('CONSULTAR_CURSOS', respuesta.data);
+                    // console.log(typeof respuesta.data);
 
 
                     // salida del archivo json puro
-                    // console.log(respuesta.data.cursos);
+                    console.log(respuesta.data.cursos);
 
                     // salida del archivo json puro
-                    // context.commit('CONSULTAR_CURSOS', respuesta.data.cursos);
+                    context.commit('CONSULTAR_CURSOS', respuesta.data.cursos);
 
 
 
@@ -99,27 +99,29 @@ const datos_cursos = {
         },
         consultarDatosTabla:(context)=>{
             console.log('LLAMADO A CONSULTAR DATOS TABLA');
-            let url = "http://localhost:3000/cursos";
+            let url = "datoscursos.json";
+            // let url = "http://localhost:3000/cursos";
             axios.get(url)
                 .then(respuesta=>{
                     // console.log(respuesta);
                     // salida del servidor localhost 3000
                     // console.log(respuesta.data);
 
-                    let longitud = respuesta.data.length;
+                    // let longitud = respuesta.data.length;
+                    let longitud = respuesta.data.cursos.length;
                     // console.log('longitud:', longitud);
                     let nuevoArreglo = [];
                     for(let i=0; i < longitud ; i ++){
                         let registro = {};
 
-                        registro.id = respuesta.data[i].id;
-                        registro.curso = respuesta.data[i].nombre;
-                        registro.cupos = respuesta.data[i].cupos;
-                        registro.inscritos = respuesta.data[i].inscritos;
-                        registro.duracion = respuesta.data[i].duracion;
-                        registro.costo = respuesta.data[i].costo;
-                        registro.terminado = respuesta.data[i].completado;
-                        registro.fecha = respuesta.data[i].fecha_registro;
+                        registro.id = respuesta.data.cursos[i].id;
+                        registro.curso = respuesta.data.cursos[i].nombre;
+                        registro.cupos = respuesta.data.cursos[i].cupos;
+                        registro.inscritos = respuesta.data.cursos[i].inscritos;
+                        registro.duracion = respuesta.data.cursos[i].duracion;
+                        registro.costo = respuesta.data.cursos[i].costo;
+                        registro.terminado = respuesta.data.cursos[i].completado;
+                        registro.fecha = respuesta.data.cursos[i].fecha_registro;
                         registro.acciones = '';
 
                         nuevoArreglo.push(registro);
